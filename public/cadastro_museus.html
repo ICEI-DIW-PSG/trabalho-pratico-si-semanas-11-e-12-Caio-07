@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Museus - ExplorArte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ExplorArte</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Voltar à Página Inicial</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 id="form-title">Cadastrar Novo Museu</h1>
+        
+        <form id="form-museu" class="mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome do Museu *</label>
+                        <input type="text" class="form-control" id="nome" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição *</label>
+                        <textarea class="form-control" id="descricao" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="imagem" class="form-label">URL da Imagem *</label>
+                        <input type="text" class="form-control" id="imagem" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="localizacao" class="form-label">Localização *</label>
+                        <input type="text" class="form-control" id="localizacao" required>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="fundacao" class="form-label">Ano de Fundação *</label>
+                        <input type="text" class="form-control" id="fundacao" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="acervo" class="form-label">Tamanho do Acervo</label>
+                        <input type="text" class="form-control" id="acervo">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="visitantes" class="form-label">Número de Visitantes/Ano</label>
+                        <input type="text" class="form-control" id="visitantes">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="area" class="form-label">Área Total</label>
+                        <input type="text" class="form-control" id="area">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="destaque" class="form-label">Destaque/Especialidade</label>
+                        <input type="text" class="form-control" id="destaque">
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="horarioFuncionamento" class="form-label">Horário de Funcionamento</label>
+                        <input type="text" class="form-control" id="horarioFuncionamento">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="ingressos" class="form-label">Valor dos Ingressos</label>
+                <input type="text" class="form-control" id="ingressos">
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-secondary me-md-2" onclick="cancelar()">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar Museu</button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer mt-5">
+        <div class="container">
+            <p>ExplorArte - Sistema de Cadastro de Museus</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+        let museuId = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            museuId = urlParams.get('id');
+            
+            if (museuId) {
+                document.getElementById('form-title').textContent = 'Editar Museu';
+                carregarMuseuParaEdicao(museuId);
+            }
+            
+            document.getElementById('form-museu').addEventListener('submit', salvarMuseu);
+        });
+
+        async function carregarMuseuParaEdicao(id) {
+            try {
+                const response = await fetch(`${API_URL}/museus/${id}`);
+                const museu = await response.json();
+                
+                // Preencher o formulário com os dados do museu
+                document.getElementById('nome').value = museu.nome || '';
+                document.getElementById('descricao').value = museu.descricao || '';
+                document.getElementById('imagem').value = museu.imagem || '';
+                document.getElementById('localizacao').value = museu.localizacao || '';
+                document.getElementById('fundacao').value = museu.fundacao || '';
+                document.getElementById('acervo').value = museu.acervo || '';
+                document.getElementById('visitantes').value = museu.visitantes || '';
+                document.getElementById('area').value = museu.area || '';
+                document.getElementById('destaque').value = museu.destaque || '';
+                document.getElementById('horarioFuncionamento').value = museu.horarioFuncionamento || '';
+                document.getElementById('ingressos').value = museu.ingressos || '';
+            } catch (error) {
+                console.error('Erro ao carregar museu:', error);
+                alert('Erro ao carregar dados do museu');
+            }
+        }
+
+        async function salvarMuseu(event) {
+            event.preventDefault();
+            
+            const museu = {
+                nome: document.getElementById('nome').value,
+                descricao: document.getElementById('descricao').value,
+                imagem: document.getElementById('imagem').value,
+                localizacao: document.getElementById('localizacao').value,
+                fundacao: document.getElementById('fundacao').value,
+                acervo: document.getElementById('acervo').value,
+                visitantes: document.getElementById('visitantes').value,
+                area: document.getElementById('area').value,
+                destaque: document.getElementById('destaque').value,
+                horarioFuncionamento: document.getElementById('horarioFuncionamento').value,
+                ingressos: document.getElementById('ingressos').value
+            };
+            
+            try {
+                let response;
+                
+                if (museuId) {
+                    // Editar museu existente
+                    response = await fetch(`${API_URL}/museus/${museuId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(museu)
+                    });
+                } else {
+                    // Criar novo museu
+                    response = await fetch(`${API_URL}/museus`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(museu)
+                    });
+                }
+                
+                if (response.ok) {
+                    const acao = museuId ? 'atualizado' : 'cadastrado';
+                    alert(`Museu ${acao} com sucesso!`);
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Erro ao salvar museu');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar museu:', error);
+                alert('Erro ao salvar museu. Verifique se o JSON Server está rodando.');
+            }
+        }
+
+        function cancelar() {
+            if (confirm('Tem certeza que deseja cancelar? As alterações não serão salvas.')) {
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

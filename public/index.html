@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            border: 50px;
+        }
+       
+       
+       .carousel-item {
+            height: 32rem;
+            background: grey;
+            color: #000000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            position: relative;
+            background-position: center;
+            background-size: cover;
+            
+        }
+        
+        .container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding-bottom: 50px;
+        }
+        
+        .overlay-image {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.5;
+            
+        }
+        
+   
+        .slide-1 {
+            background-image: url(./images/img1.jpg.webp);
+        }
+        
+        .slide-2 {
+            background-image: url(./images/img6.webp);
+        }
+        
+        .slide-3 {
+            background-image: url(./images/img5.jpg);
+        }
+        .row-featurette{
+           display: flex;
+           flex-wrap: wrap;
+           margin-top: calc(var(--bs-gutter-y) * -1) ; 
+           margin-right: calc(var(--bs-gutter-x) * -.5);
+            margin-left: calc(var(--bs-gutter-x) * -.5);
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            padding: 25px;
+            margin: 70px;
+            border: 5px;
+        }
+        .row-featurette2{
+            display: flex;
+           flex-wrap: wrap;
+           margin-top: calc(var(--bs-gutter-y) * -1) ; 
+           margin-right: calc(var(--bs-gutter-x) * -.5);
+            margin-left: calc(var(--bs-gutter-x) * -.5);
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            padding: 25px;
+            margin: 70px;
+            border: 5px;
+        }
+        .featurette-divider{
+            margin: 100px;
+            border: none;
+            height: 2px;
+            background-color: #6c757d;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .featurette-heading{
+            margin: 5px;
+        }
+        .text-muted{
+            margin: 5px;
+        }
+        .lead{
+            margin: 5px;
+
+        }
+        .lead2{
+            margin: 20px;
+        }
+        .featurette-heading2{
+            margin: 5px;
+            padding: 5px;
+        }
+        
+        .footer{
+            margin: 80px;
+            padding: 20px;
+        }
+        
+.carousel {
+    position: relative;
+}
+
+.carousel::after {
+ content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: radial-gradient(ellipse at top, rgba(0,0,0,0.3) 0%, transparent 80%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+        
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="detalhes.html">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active slide-1">
+            <div class="overlay-image"></div>
+            <div class="container">
+                <div class="carousel-caption text-start">
+                    <h1>Descubra Lugares Incríveis</h1>
+                    <p>Explore exposições únicas e espaços culturais que contam histórias fascinantes através da arte e da arquitetura.</p>
+                    <p><a class="btn btn-lg btn-primary" onclick="navigateToPage('museus', 1)">Explorar Agora</button></a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-item slide-2">
+            <div class="overlay-image"></div>
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Arte Contemporânea em Destaque</h1>
+                    <p>Conheça as tendências mais recentes no mundo das artes visuais em galerias modernas e espaços alternativos no Brasil</p>
+                    <p><a class="btn btn-lg btn-primary" onclick="navigateToPage('exposicoes', 1)">Ver Exposições</button></a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="carousel-item slide-3">
+            <div class="overlay-image"></div>
+            <div class="container">
+                <div class="carousel-caption text-end">
+                    <h1>Patrimônio cultural</h1>
+                    <p>Viaje no tempo através de museus e monumentos que preservam a memória cultural da humanidade.</p>
+                    <p><a class="btn btn-lg btn-primary" onclick="navigateToPage('arquitetura', 1)">Conhecer Museus</button></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<div class="row-featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Instituto Inhotim <span class="text-muted"></span></h2>
+        <p class="lead">Maior museu a céu aberto do mundo.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="./images/img2.jpg.webp" class="featurette-image img-fluid mx-auto" width="500" height="500" alt="Arquitetura impressionante de museu moderno">
+      </div>
+    </div>
+
+<hr class="featurette-divider">
+
+<div class="row-featurette2">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading2">Museu de Arte de São Paulo Assis Chateaubriand <span class="text-muted"></span></h2>
+        <p class="lead2">Museu de arte particular e sem fins lucrativos brasileiro</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <img src="./images/img7.jpg" class="featurette-image img-fluid mx-auto" width="500" height="500" alt="Arquitetura impressionante de museu moderno">
+
+      </div>
+    </div>
+
+<hr class="featurette-divider">
+
+    <div class="row-featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Museu do Amanhã <span class="text-muted"></span></h2>
+        <p class="lead">Onde ciência, arte e inovação se encontram.</p>
+      </div>
+      <div class="col-md-5">
+        <img src="./images/img3.jpg" class="featurette-image img-fluid mx-auto" width="500" height="500" alt="Arquitetura impressionante de museu moderno">
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- No final do body do index.html -->
+<a href="cadastro_museus.html" class="btn btn-primary btn-lg floating-btn" 
+   style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+   + Novo Museu
+</a>
+</body>
+<footer class="footer">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p>Autoria: <br> Aluno: Caio Igor Lelis Silva <br> Curso: Sistemas de Informação <br> Turma: Noite <br> · <a href="https://github.com/Caio-07" target="_blank">GitHub</a> · <a href="https://www.instagram.com" target="_blank">Instagram</a></p>
+  </footer>
+  <script>
+    function navigateToPage(section, itemId = 1) {
+    // Redireciona para a segunda página com parâmetros
+    window.location.href = `detalhes.html?section=${section}&id=${itemId}`;
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</html>
